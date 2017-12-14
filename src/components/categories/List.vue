@@ -84,29 +84,39 @@
         };
       },
 
+      isValidGuid(guid = '') {
+        return /^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/.test(guid);
+      },
+
       onDrop(category, event) {
         event.preventDefault();
 
         const personGuid = event.dataTransfer.getData('text/plain');
 
-        this.categories = this.categories.map(c => ({ ...c, hover: false }));
+        if (this.isValidGuid(personGuid)) {
+          this.categories = this.categories.map(c => ({ ...c, hover: false }));
 
-        this.$emit('assign', {
-          category,
-          personGuid,
-        });
+          this.$emit('assign', {
+            category,
+            personGuid,
+          });
+        }
       },
 
       onDragEnter(category, event) {
         event.preventDefault();
 
-        this.categories = this.categories.map((c) => {
-          if (c.type === category) {
-            return { ...c, hover: true };
-          }
+        const personGuid = event.dataTransfer.getData('text/plain');
 
-          return c;
-        });
+        if (this.isValidGuid(personGuid)) {
+          this.categories = this.categories.map((c) => {
+            if (c.type === category) {
+              return { ...c, hover: true };
+            }
+
+            return c;
+          });
+        }
       },
 
       onDragOver(category, event) {
@@ -116,13 +126,17 @@
       onDragLeave(category, event) {
         event.preventDefault();
 
-        this.categories = this.categories.map((c) => {
-          if (c.type === category) {
-            return { ...c, hover: false };
-          }
+        const personGuid = event.dataTransfer.getData('text/plain');
 
-          return c;
-        });
+        if (this.isValidGuid(personGuid)) {
+          this.categories = this.categories.map((c) => {
+            if (c.type === category) {
+              return { ...c, hover: false };
+            }
+
+            return c;
+          });
+        }
       },
 
       isActive(categoryType) {
