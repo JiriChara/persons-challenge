@@ -4,7 +4,7 @@
       Peops
     </p>
 
-    <div class="panel-block">
+    <div class="panel-block" v-if="persons.length >= 2">
       <p class="control has-icons-left">
         <input v-model="searchTerm" class="input is-small" type="text" placeholder="search">
         <span class="icon is-small is-left">
@@ -14,6 +14,7 @@
     </div>
 
     <div
+      v-if="persons.length"
       class="drag"
       v-for="person in bySearchQuery(persons, searchTerm)"
       :key="person.guid"
@@ -29,6 +30,10 @@
         </span>
         <span>{{ person.name }}</span>
       </router-link>
+    </div>
+
+    <div class="panel-block" v-if="persons.length === 0">
+      Nothing to see here
     </div>
   </nav>
 </template>
