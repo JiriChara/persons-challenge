@@ -3,7 +3,7 @@
     <div class="container">
       <div class="columns">
         <aside class="column is-one-third">
-          Persons
+          <pc-persons-list :persons="personList"></pc-persons-list>
         </aside>
 
         <article class="column">
@@ -17,8 +17,14 @@
 <script>
   import { mapActions, mapGetters, mapState } from 'vuex';
 
+  import PcPersonsList from '@/components/persons/List';
+
   export default {
     name: 'persons',
+
+    components: {
+      PcPersonsList,
+    },
 
     computed: {
       ...mapGetters('persons', {
