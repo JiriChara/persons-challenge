@@ -2,8 +2,16 @@
   <section class="section">
     <div class="container">
       <div class="columns" v-if="personList.length">
-        <aside class="column is-one-third">
-          <pc-persons-list :persons="personList"></pc-persons-list>
+        <aside class="column is-one-half">
+          <div class="columns">
+            <div class="column">
+              <pc-categories-list></pc-categories-list>
+            </div>
+
+            <div class="column">
+              <pc-persons-list :persons="filteredPersons"></pc-persons-list>
+            </div>
+          </div>
         </aside>
 
         <article class="column">
@@ -19,22 +27,33 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions, mapGetters, mapState } from 'vuex';
 
   import PcPersonsList from '@/components/persons/List';
+  import PcCategoriesList from '@/components/categories/List';
 
   export default {
     name: 'persons',
 
     components: {
       PcPersonsList,
+      PcCategoriesList,
     },
 
     computed: {
+      ...mapState([
+        'route',
+      ]),
+
       ...mapGetters('persons', {
         personList: 'list',
+        personFilteredList: 'filteredList',
         isLoadingPersons: 'isLoading',
       }),
+
+      filteredPersons() {
+        return this.personFilteredList(this.route.query);
+      },
     },
 
     methods: {
