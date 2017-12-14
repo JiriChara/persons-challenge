@@ -31,3 +31,10 @@
     },
   };
 </script>
+
+<style lang="scss" scoped>
+  img {
+    height: 128px;
+    width: 128px;
+  }
+</style>

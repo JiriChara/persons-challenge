@@ -106,4 +106,9 @@
       border-top: none;
     }
   }
+
+  img {
+    height: 14px;
+    width: 14px;
+  }
 </style>
