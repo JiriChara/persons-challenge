@@ -27,7 +27,7 @@
 
         <div class="navbar-end">
           <a href="https://github.com/JiriChara/persons-challenge" target="_blank" title="GitHub" class="navbar-item">
-            <b-icon icon="github" size="lg"></b-icon>
+            <b-icon icon="github"></b-icon>
           </a>
         </div>
       </div>

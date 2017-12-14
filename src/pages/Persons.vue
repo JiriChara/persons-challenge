@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="columns">
+      <div class="columns" v-if="personList.length">
         <aside class="column is-one-third">
           <pc-persons-list :persons="personList"></pc-persons-list>
         </aside>
@@ -10,6 +10,10 @@
           <router-view></router-view>
         </article>
       </div>
+
+      <b-notification v-if="personList.length === 0 && !isLoadingPersons" type="is-danger" has-icon :closable="false">
+        <p>Ooops. Something went wrong. Sorry for that <b-icon icon="frown-o" size="is-small"></b-icon></p>
+      </b-notification>
     </div>
   </section>
 </template>
@@ -38,8 +42,16 @@
         fetchPersons: 'fetchList',
       }),
 
-      fetchData() {
-        return this.fetchPersons();
+      async fetchData() {
+        try {
+          this.$Progress.start();
+
+          await this.fetchPersons();
+
+          this.$Progress.finish();
+        } catch (err) {
+          this.$Progress.fail();
+        }
       },
     },
 

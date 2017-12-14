@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
 import Gravatar from 'vue-gravatar';
+import VueProgressBar from 'vue-progressbar';
 import { sync } from 'vuex-router-sync';
 
 import App from '@/App';
@@ -19,6 +20,10 @@ Vue.config.productionTip = false;
 Vue.use(Buefy, {
   defaultIconPack: 'fa',
   defaultContentElement: '#app',
+});
+
+Vue.use(VueProgressBar, {
+  thickness: '3px',
 });
 
 /**

@@ -4,6 +4,7 @@
 
     <main>
       <router-view></router-view>
+      <vue-progress-bar></vue-progress-bar>
     </main>
 
     <pc-footer></pc-footer>
@@ -20,6 +21,22 @@
     components: {
       PcNavbar,
       PcFooter,
+    },
+
+    created() {
+      this.$router.beforeEach((to, from, next) => {
+        this.$Progress.start();
+
+        next();
+      });
+
+      this.$router.afterEach(() => {
+        this.$Progress.finish();
+      });
+    },
+
+    mounted() {
+      this.$Progress.finish();
     },
   };
 </script>
