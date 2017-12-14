@@ -10,3 +10,11 @@ $fa-font-path: '~font-awesome/fonts/';
 // A good place to customize the bulma theme and stying (if you don't like purple)
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+
+a,
+button {
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+}

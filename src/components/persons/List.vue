@@ -13,17 +13,23 @@
       </p>
     </div>
 
-    <router-link
+    <div
+      class="drag"
       v-for="person in bySearchQuery(persons, searchTerm)"
-      class="panel-block"
-      :class="{ 'is-active': isActive(person) }"
-      :to="getPersonLink(person)"
-      :key="person.guid">
-      <span class="panel-icon">
-        <v-gravatar :email="person.email" :size="14"></v-gravatar>
-      </span>
-      {{ person.name }}
-    </router-link>
+      :key="person.guid"
+      @dragstart="onDragStart(person, $event)"
+      draggable>
+      <router-link
+        class="panel-block"
+        :class="{ 'is-active': isActive(person) }"
+        :to="getPersonLink(person)"
+        draggable>
+        <span class="panel-icon">
+          <v-gravatar :email="person.email" :size="14"></v-gravatar>
+        </span>
+        <span>{{ person.name }}</span>
+      </router-link>
+    </div>
   </nav>
 </template>
 
@@ -71,6 +77,12 @@
 
         return regex.test(this.route.path);
       },
+
+      onDragStart(person, event) {
+        const transfer = event.dataTransfer;
+
+        transfer.setData('text/plain', person.guid);
+      },
     },
   };
 </script>
@@ -81,6 +93,12 @@
   .panel-block {
     &.is-active {
       background-color: $light;
+    }
+  }
+
+  .drag {
+    & > a {
+      border-top: none;
     }
   }
 </style>

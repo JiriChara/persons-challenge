@@ -1,4 +1,5 @@
 import createCRUDModule from 'vuex-crud';
+import Vue from 'vue';
 
 import client from '@/utils/client';
 
@@ -28,6 +29,29 @@ export default createCRUDModule({
   client,
 
   idAttribute: 'guid',
+
+  actions: {
+    assignCategory({ commit, state }, options) {
+      commit('assignCategory', options);
+
+      const person = state.entities[options.personGuid];
+
+      return Promise.resolve(
+        person,
+      );
+    },
+  },
+
+  mutations: {
+    assignCategory(state, { category, personGuid }) {
+      const person = state.entities[personGuid];
+
+      Vue.set(state.entities, personGuid, {
+        ...person,
+        category,
+      });
+    },
+  },
 
   getters: {
     // I prefer to see this stuff on back-end ;)

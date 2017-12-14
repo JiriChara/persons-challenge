@@ -15,7 +15,10 @@
         <dl>
           <template v-for="info in userInfo">
             <dt><strong>{{ info.title }}</strong></dt>
-            <dd>{{ info.value }}</dd>
+            <dd>
+              <b-tag v-if="info.key === 'category'" type="is-success">{{ info.value }}</b-tag>
+              <span v-else>{{ info.value }}</span>
+            </dd>
           </template>
         </dl>
       </div>
@@ -37,6 +40,11 @@
     computed: {
       userInfo() {
         const details = [
+          {
+            title: 'Category',
+            key: 'category',
+          },
+
           {
             title: 'Gender',
             key: 'gender',

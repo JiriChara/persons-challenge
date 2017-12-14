@@ -5,7 +5,7 @@
         <aside class="column is-one-half">
           <div class="columns">
             <div class="column">
-              <pc-categories-list></pc-categories-list>
+              <pc-categories-list @assign="onAssignCategoryToPerson"></pc-categories-list>
             </div>
 
             <div class="column">
@@ -29,6 +29,7 @@
 <script>
   import { mapActions, mapGetters, mapState } from 'vuex';
 
+  import router from '@/router';
   import PcPersonsList from '@/components/persons/List';
   import PcCategoriesList from '@/components/categories/List';
 
@@ -59,7 +60,24 @@
     methods: {
       ...mapActions('persons', {
         fetchPersons: 'fetchList',
+        assignCategoryToPerson: 'assignCategory',
       }),
+
+      async onAssignCategoryToPerson(...args) {
+        const person = await this.assignCategoryToPerson(...args);
+
+        this.$snackbar.open({
+          message: `${person.name} has been assigned to new category.`,
+          queue: false,
+        });
+
+        router.push({
+          name: 'person-detail',
+          params: {
+            slug: person.guid,
+          },
+        });
+      },
 
       async fetchData() {
         try {
