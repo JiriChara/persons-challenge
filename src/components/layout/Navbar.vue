@@ -6,14 +6,19 @@
           <img class="logo" src="../../assets/logo.png" alt="Flairoo" />
         </router-link>
 
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+        <div
+          class="navbar-burger burger"
+          :class="{ 'is-active': isMobileMenuActive }"
+          @click="toggleMobileMenu">
           <span></span>
           <span></span>
           <span></span>
         </div>
       </div>
 
-      <div class="navbar-menu">
+      <div
+        class="navbar-menu"
+        :class="{ 'is-active': isMobileMenuActive }">
         <div class="navbar-start">
           <router-link to="/" class="navbar-item">
             Home
@@ -31,8 +36,22 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex';
+
   export default {
     name: 'pc-navbar',
+
+    computed: {
+      ...mapState('navbar', [
+        'isMobileMenuActive',
+      ]),
+    },
+
+    methods: {
+      ...mapActions('navbar', [
+        'toggleMobileMenu',
+      ]),
+    },
   };
 </script>
 
