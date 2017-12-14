@@ -15,7 +15,38 @@
 </template>
 
 <script>
+  import { mapActions, mapGetters, mapState } from 'vuex';
+
   export default {
     name: 'persons',
+
+    computed: {
+      ...mapGetters('persons', {
+        personList: 'list',
+        isLoadingPersons: 'isLoading',
+      }),
+
+      ...mapState([
+        'route',
+      ]),
+    },
+
+    methods: {
+      ...mapActions('persons', {
+        fetchPersons: 'fetchList',
+      }),
+
+      fetchData() {
+        return this.fetchPersons();
+      },
+    },
+
+    watch: {
+      $route: 'fetchData',
+    },
+
+    created() {
+      this.fetchData();
+    },
   };
 </script>

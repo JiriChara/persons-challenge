@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "buefy": "^0.6.2",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
@@ -20,6 +21,7 @@
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
+    "vuex-crud": "^0.2.0",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
