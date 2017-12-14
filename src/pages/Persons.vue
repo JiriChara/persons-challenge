@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <aside>
-      Persons
-    </aside>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <aside class="column is-one-third">
+          Persons
+        </aside>
 
-    <main>
-      <router-view></router-view>
-    </main>
-  </div>
+        <article class="column">
+          <router-view></router-view>
+        </article>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
