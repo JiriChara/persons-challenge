@@ -6,7 +6,7 @@
 
     <div class="panel-block">
       <p class="control has-icons-left">
-        <input class="input is-small" type="text" placeholder="search">
+        <input v-model="searchTerm" class="input is-small" type="text" placeholder="search">
         <span class="icon is-small is-left">
           <i class="fa fa-search"></i>
         </span>
@@ -14,7 +14,7 @@
     </div>
 
     <router-link
-      v-for="person in persons"
+      v-for="person in bySearchQuery(persons, searchTerm)"
       class="panel-block"
       :class="{ 'is-active': isActive(person) }"
       :to="getPersonLink(person)"
@@ -30,8 +30,16 @@
 <script>
   import { mapState } from 'vuex';
 
+  import { bySearchQuery } from '@/store/persons';
+
   export default {
     name: 'pc-persons-list',
+
+    data() {
+      return {
+        searchTerm: '',
+      };
+    },
 
     props: {
       persons: {
@@ -47,6 +55,8 @@
     },
 
     methods: {
+      bySearchQuery,
+
       getPersonLink(person) {
         return {
           name: 'person-detail',

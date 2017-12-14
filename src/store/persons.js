@@ -53,4 +53,5 @@ export default createCRUDModule({
 
 export {
   byCategory,
+  bySearchQuery,
 };
