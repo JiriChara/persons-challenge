@@ -72,6 +72,16 @@ export default createCRUDModule({
         return list;
       };
     },
+
+    getCountPerCategory(state, getters) {
+      return (category = 'all') => {
+        if (category === 'all') {
+          return getters.list.length;
+        }
+
+        return byCategory(getters.list, category).length;
+      };
+    },
   },
 });
 

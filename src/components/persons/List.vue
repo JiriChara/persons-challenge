@@ -64,10 +64,15 @@
       bySearchQuery,
 
       getPersonLink(person) {
+        const { category } = this.route.query;
+
         return {
           name: 'person-detail',
           params: {
             slug: person.guid,
+          },
+          query: {
+            category,
           },
         };
       },

@@ -6,7 +6,10 @@
 
     <router-link
       class="panel-block"
+      :class="{ 'is-active': isActive('all') }"
       :to="getCategoryLink('all')">
+      <b-tag type="is-info">{{ personsCountPerCategory('all') }}</b-tag>
+
       <strong>All</strong>
     </router-link>
 
@@ -21,7 +24,9 @@
       @drop="onDrop(category.type, $event)">
       <router-link
         class="panel-block"
+        :class="{ 'is-active': isActive(category.type) }"
         :to="getCategoryLink(category.type)">
+        <b-tag type="is-info">{{ personsCountPerCategory(category.type) }}</b-tag>
         <span>{{ category.name }}</span>
       </router-link>
     </div>
@@ -29,6 +34,8 @@
 </template>
 
 <script>
+  import { mapGetters, mapState } from 'vuex';
+
   export default {
     name: 'pc-catagories-list',
 
@@ -55,6 +62,17 @@
         ],
       };
     },
+
+    computed: {
+      ...mapGetters('persons', {
+        personsCountPerCategory: 'getCountPerCategory',
+      }),
+
+      ...mapState([
+        'route',
+      ]),
+    },
+
 
     methods: {
       getCategoryLink(category) {
@@ -106,6 +124,16 @@
           return c;
         });
       },
+
+      isActive(categoryType) {
+        const { category } = this.route.query;
+
+        if (!category && categoryType === 'all') {
+          return true;
+        }
+
+        return category === categoryType;
+      },
     },
   };
 </script>
@@ -121,5 +149,15 @@
 
   .over {
     background-color: $success;
+  }
+
+  .tag {
+    margin-right: 10px;
+  }
+
+  .panel-block {
+    &.is-active {
+      background-color: $light;
+    }
   }
 </style>
