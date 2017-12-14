@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters, mapState } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   import PcPersonsList from '@/components/persons/List';
 
@@ -31,10 +31,6 @@
         personList: 'list',
         isLoadingPersons: 'isLoading',
       }),
-
-      ...mapState([
-        'route',
-      ]),
     },
 
     methods: {
@@ -45,10 +41,6 @@
       fetchData() {
         return this.fetchPersons();
       },
-    },
-
-    watch: {
-      $route: 'fetchData',
     },
 
     created() {
