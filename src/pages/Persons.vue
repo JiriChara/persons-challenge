@@ -29,7 +29,6 @@
 <script>
   import { mapActions, mapGetters, mapState } from 'vuex';
 
-  import router from '@/router';
   import PcPersonsList from '@/components/persons/List';
   import PcCategoriesList from '@/components/categories/List';
 
@@ -69,13 +68,6 @@
         this.$snackbar.open({
           message: `${person.name} has been assigned to new category.`,
           queue: false,
-        });
-
-        router.push({
-          name: 'person-detail',
-          params: {
-            slug: person.guid,
-          },
         });
       },
 
