@@ -2,9 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import store from '@/store';
-import Persons from '@/pages/Persons';
-import Dashboard from '@/pages/persons/Dashboard';
-import PersonDetail from '@/pages/persons/Detail';
+
+const Persons = () => import('@/pages/Persons');
+const Dashboard = () => import('@/pages/persons/Dashboard');
+const PersonDetail = () => import('@/pages/persons/Detail');
+const NotFound = () => import('@/pages/NotFound');
 
 Vue.use(Router);
 
@@ -29,6 +31,12 @@ const router = new Router({
           component: PersonDetail,
         },
       ],
+    },
+
+    {
+      path: '*',
+      name: 'not-found',
+      component: NotFound,
     },
   ],
 });
