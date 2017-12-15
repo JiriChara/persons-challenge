@@ -1,5 +1,5 @@
 <template>
-  <article class="media">
+  <article class="media person-detail">
     <figure class="media-left">
       <p class="image is-128x128">
         <v-gravatar :email="person.email" :size="128"></v-gravatar>

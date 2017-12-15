@@ -1,5 +1,5 @@
 <template>
-  <nav class="panel">
+  <nav class="panel categories">
     <p class="panel-heading">
       Categories
     </p>

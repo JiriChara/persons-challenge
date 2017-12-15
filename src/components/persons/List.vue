@@ -1,5 +1,5 @@
 <template>
-  <nav class="panel">
+  <nav class="panel persons">
     <p class="panel-heading">
       Peops
     </p>

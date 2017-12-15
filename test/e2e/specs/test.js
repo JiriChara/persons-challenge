@@ -1,19 +1,32 @@
-// For authoring Nightwatch tests, see
-// http://nightwatchjs.org/guide#usage
-
 module.exports = {
-  'default e2e tests': function test(browser) {
-    // automatically uses dev Server port from /config.index.js
-    // default: http://localhost:8080
-    // see nightwatch.conf.js
+  'Default Test': function test(browser) {
     const devServer = browser.globals.devServerURL;
 
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'Welcome to Your Vue.js App')
-      .assert.elementCount('img', 1)
+
+      // Shows info notifictions by default
+      .assert.containsText('.notification.is-info', 'Select a person in the list in order to see more details.')
+
+      // Shows all categories in the panel
+      .assert.containsText('.categories.panel', 'All')
+      .assert.containsText('.categories.panel', 'Marketing')
+      .assert.containsText('.categories.panel', 'Finance')
+      .assert.containsText('.categories.panel', 'IT')
+
+      // Show persons panel with 5 persons
+      .assert.elementCount('.persons.panel a.panel-block', 5)
+
+      // Shows person details when clicked
+      .getText('.persons.panel a.panel-block:first-child', function (result) {
+        this.click('.persons.panel a.panel-block:first-child');
+        this.waitForElementVisible('.person-detail', 300);
+        this.assert.containsText('.person-detail h2', result.value);
+      })
+
+      // etc. etc. etc.
+
       .end();
   },
 };
