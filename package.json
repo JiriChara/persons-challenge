@@ -9,7 +9,7 @@
     "start": "node bin/server.js",
     "unit": "cross-env BABEL_ENV=test jest",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run e2e",
+    "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/e2e/specs",
     "build": "node build/build.js"
   },
