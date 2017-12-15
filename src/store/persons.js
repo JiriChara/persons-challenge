@@ -2,6 +2,7 @@ import createCRUDModule from 'vuex-crud';
 import Vue from 'vue';
 
 import client from '@/utils/client';
+import parseDate from '@/utils/parseDate';
 
 const byCategory = (list, category = 'all') => (category === 'all' ?
   list :
@@ -22,6 +23,16 @@ const bySearchQuery = (list, query) => {
     ),
   );
 };
+
+const sort = list => list.sort((left, right) => {
+  const leftGender = left.gender;
+  const rightGender = right.gender;
+
+  const leftStartedAt = parseDate(left.registered);
+  const rightStartedAt = parseDate(right.registered);
+
+  return leftGender.localeCompare(rightGender) || rightStartedAt.diff(leftStartedAt);
+});
 
 export default createCRUDModule({
   resource: 'persons',
@@ -69,7 +80,7 @@ export default createCRUDModule({
           list = bySearchQuery(list, query.q);
         }
 
-        return list;
+        return sort(list);
       };
     },
 

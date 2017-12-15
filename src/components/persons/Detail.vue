@@ -17,7 +17,8 @@
             <dt><strong>{{ info.title }}</strong></dt>
             <dd>
               <b-tag v-if="info.key === 'category'" type="is-success">{{ info.value }}</b-tag>
-              <span v-else>{{ info.value }}</span>
+              <b-icon v-else-if="info.key === 'gender'" :icon="info.value === 'female' ? 'venus' : 'mars'"></b-icon>
+              <span v-else>{{ info.format(info.value) }}</span>
             </dd>
           </template>
         </dl>
@@ -27,6 +28,8 @@
 </template>
 
 <script>
+  import parseDate from '@/utils/parseDate';
+
   export default {
     name: 'pc-persons-list',
 
@@ -43,26 +46,40 @@
           {
             title: 'Category',
             key: 'category',
+            format(val) { return val; },
           },
 
           {
             title: 'Gender',
             key: 'gender',
+            format(val) { return val; },
           },
 
           {
             title: 'Age',
             key: 'age',
+            format(val) { return val; },
           },
 
           {
             title: 'Company',
             key: 'company',
+            format(val) { return val; },
           },
 
           {
             title: 'Phone',
             key: 'phone',
+            format(val) { return val; },
+          },
+
+          {
+            title: 'Registered At',
+            key: 'registered',
+            format(val) {
+              const dateFormat = 'YYYY-MM-DDTHH:mm:ss ZZ';
+              return parseDate(val, dateFormat).format('LLLL');
+            },
           },
         ];
 

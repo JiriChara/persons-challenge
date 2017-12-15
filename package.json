@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "buefy": "^0.6.2",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
+    "moment": "^2.19.4",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.2",
     "vue-gravatar": "^1.1.3",

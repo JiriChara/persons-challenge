@@ -19,8 +19,8 @@
         </article>
       </div>
 
-      <b-notification v-if="personList.length === 0 && !isLoadingPersons" type="is-danger" has-icon :closable="false">
-        <p>Ooops. Something went wrong. Sorry for that <b-icon icon="frown-o" size="is-small"></b-icon></p>
+      <b-notification v-if="personList.length === 0 && !isLoadingPersons" type="is-warning" has-icon :closable="false">
+        <p>Ooops. Seems like no persons are available <b-icon icon="frown-o" size="is-small"></b-icon></p>
       </b-notification>
     </div>
   </section>
