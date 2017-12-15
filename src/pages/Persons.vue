@@ -9,7 +9,7 @@
             </div>
 
             <div class="column">
-              <pc-persons-list :persons="filteredPersons"></pc-persons-list>
+              <pc-persons-list :persons="filteredPersons" @remove="onRemovePerson"></pc-persons-list>
             </div>
           </div>
         </aside>
@@ -29,6 +29,7 @@
 <script>
   import { mapActions, mapGetters, mapState } from 'vuex';
 
+  import router from '@/router';
   import PcPersonsList from '@/components/persons/List';
   import PcCategoriesList from '@/components/categories/List';
 
@@ -59,6 +60,7 @@
     methods: {
       ...mapActions('persons', {
         fetchPersons: 'fetchList',
+        destroyPerson: 'destroy',
         assignCategoryToPerson: 'assignCategory',
       }),
 
@@ -81,6 +83,33 @@
         } catch (err) {
           this.$Progress.fail();
         }
+      },
+
+      onRemovePerson(person) {
+        const { name } = person;
+
+        this.$dialog.confirm({
+          title: `Delete ${name}`,
+          message: `Are you sure you wanna delete ${name}?`,
+          confirmText: 'Yes!',
+          cancelText: 'Nope',
+          type: 'is-danger',
+          hasIcon: true,
+          onConfirm: async () => {
+            const id = person.guid;
+
+            await this.destroyPerson({ id });
+
+            this.$snackbar.open({
+              message: `${name} has been successfully removed.`,
+              queue: false,
+            });
+
+            router.push({
+              name: 'persons',
+            });
+          },
+        });
       },
     },
 

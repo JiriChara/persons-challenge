@@ -15,6 +15,14 @@ app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
+/**
+ * DELETE /api/persons/:id
+ * just fake success response..
+ */
+app.delete('/api/persons/:id', (req, res) => {
+  res.status(204).send();
+});
+
 app.listen(port, () => {
   /* eslint-disable no-console */
   console.log(`Express is running on localhost:${port}`);

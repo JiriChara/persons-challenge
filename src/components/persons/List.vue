@@ -29,6 +29,12 @@
           <v-gravatar :email="person.email" :size="14"></v-gravatar>
         </span>
         <span>{{ person.name }}</span>
+
+        <a class="remove-btn" @click.prevent="onRemovePerson(person)">
+          <b-tooltip label="Remove Person">
+            <b-icon icon="trash" class="is-pulled-right"></b-icon>
+          </b-tooltip>
+        </a>
       </router-link>
     </div>
 
@@ -93,6 +99,10 @@
 
         transfer.setData('text/plain', person.guid);
       },
+
+      onRemovePerson(person) {
+        this.$emit('remove', person);
+      },
     },
   };
 </script>
@@ -101,8 +111,14 @@
   @import '~bulma/sass/utilities/_all';
 
   .panel-block {
+    position: relative;
+
     &.is-active {
       background-color: $light;
+    }
+
+    .remove-btn {
+      margin-left: auto;
     }
   }
 
