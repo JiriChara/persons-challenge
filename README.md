@@ -16,7 +16,7 @@ yarn install
 
 ## Run in Development Mode
 
-Start mock middleware to sever persons.json:
+Start mock middleware to serve persons.json:
 
 ``` bash
 yarn start
